@@ -33,10 +33,10 @@ public class ParkingServiceImpl implements ParkingService{
 	@Override
 	public boolean leaveSlot(int parkingSlotNumber) throws ParkingSlotNotOccupiedException{
 		if(parkingSlot[parkingSlotNumber-1].isAvailable()){
-			throw new ParkingSlotNotOccupiedException("Parking Slot "+(parkingSlotNumber+1)+" is already Empty");
+			throw new ParkingSlotNotOccupiedException("Parking Slot "+(parkingSlotNumber)+" is already Empty");
 		}else{
 			parkingSlot[parkingSlotNumber-1].setAvailable(true);
-			cars.remove(parkingSlot[parkingSlotNumber+1].getCar());
+			cars.remove(parkingSlot[parkingSlotNumber-1].getCar());
 			parkingSlot[parkingSlotNumber-1].setCar(null);
 			return true;
 		}
@@ -52,13 +52,6 @@ public class ParkingServiceImpl implements ParkingService{
 				
 			}
 		}
-		/*int noOfSlots=parkingSlot.length;
-		List<Car> cars=new ArrayList<>();
-		for(int i=0;i<noOfSlots;i++){
-			if(!parkingSlot[i].isAvailable()){
-				cars.add(parkingSlot[i].getCar());
-			}
-		}*/
 		return carsMap;
 	}
 
